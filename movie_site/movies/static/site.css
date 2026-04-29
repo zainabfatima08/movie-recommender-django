@@ -1,0 +1,17 @@
+:root {
+  --bg-soft: #f4f6f8;
+}
+body {
+  background: var(--bg-soft);
+}
+.hero-card {
+  background: linear-gradient(120deg, #ffffff 0%, #f3f5ff 100%);
+  border: 1px solid #e9ecef;
+}
+.movie-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
+}

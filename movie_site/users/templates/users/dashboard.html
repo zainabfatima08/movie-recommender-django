@@ -1,0 +1,47 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+<h1 class="h3 mb-4"><i class="bi bi-collection-play me-2"></i>My Dashboard</h1>
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body">
+        <h2 class="h5">Watchlist</h2>
+        <ul class="list-group list-group-flush">
+          {% for item in watchlist %}
+            <li class="list-group-item px-0"><a href="{% url 'movie-detail' item.movie.id %}">{{ item.movie.title }}</a></li>
+          {% empty %}
+            <li class="list-group-item px-0 text-secondary">Nothing in watchlist.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body">
+        <h2 class="h5">Watched</h2>
+        <ul class="list-group list-group-flush">
+          {% for item in watched %}
+            <li class="list-group-item px-0">{{ item.movie.title }} <span class="text-secondary small">({{ item.watched_on }})</span></li>
+          {% empty %}
+            <li class="list-group-item px-0 text-secondary">No watched movies yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="card border-0 shadow-sm mt-4">
+  <div class="card-body">
+    <h2 class="h5">Recommended For You</h2>
+    <div class="d-flex gap-2 flex-wrap">
+      {% for movie in recommendations %}
+        <a class="btn btn-outline-dark btn-sm" href="{% url 'movie-detail' movie.id %}">{{ movie.title }}</a>
+      {% empty %}
+        <span class="text-secondary">Add ratings to improve recommendations.</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

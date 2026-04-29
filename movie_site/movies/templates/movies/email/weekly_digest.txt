@@ -1,0 +1,8 @@
+Hello {{ user.username }},
+
+Here are this week's top movies:
+{% for movie in movies %}
+- {{ movie.title }} ({{ movie.avg_rating|floatformat:1 }} / 5, {{ movie.votes }} reviews)
+{% endfor %}
+
+See you next week.
