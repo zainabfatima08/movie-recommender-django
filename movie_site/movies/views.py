@@ -13,9 +13,9 @@ class MovieListView(View):
     template_name = 'movies/movie_list.html'
 
     def get(self, request):
-        query = request.GET.get('q', '').strip()
+        query    = request.GET.get('q', '').strip()
         genre_id = request.GET.get('genre')
-        movies = Movie.objects.prefetch_related('genres').annotate(avg_rating=Avg('reviews__rating'),
+        movies   = Movie.objects.prefetch_related('genres').annotate(avg_rating=Avg('reviews__rating'),
                                                                    total_reviews=Count('reviews'))
 
         if query:
@@ -50,11 +50,11 @@ class MovieDetailView(View):
             watch_status = UserMovieStatus.objects.filter(user=request.user, movie=movie).first()
 
         context = {
-            'movie': movie,
-            'review': review,
-            'watch_status': watch_status,
+            'movie'          : movie,
+            'review'         : review,
+            'watch_status'   : watch_status,
             'recommendations': recommend_movies_for_user(request.user, limit=6),
-            'reviews': movie.reviews.select_related('user').all(),
+            'reviews'        : movie.reviews.select_related('user').all(),
         }
 
         return render(request, self.template_name, context)
